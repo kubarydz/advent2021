@@ -12,14 +12,13 @@ fun main() {
     }
 
     // test if implementation meets criteria from the description, like:
-//    val testInput = readInput("Day04_test")
-//    println(part1(testInput))
-//    check(part1(testInput) == 4512)
-//    check(part2(testInput) == 230)
+    val testInput = readInput("Day04_test")
+    check(part1(testInput) == 4512)
+//    check(part2(testInput) == 1924)
 
     val input = readInput("Day04")
     println(part1(input))
-//    println(part2(input))
+    println(part2(input))
 }
 
 fun separateBoards(input: List<String>): Pair<List<String>, List<Board>> {
@@ -43,7 +42,6 @@ fun getWinnerScore(boards: List<Board>, drawNumbers: List<String>, draws: HashMa
     for (draw in drawNumbers) {
         draws[draw] = true
         if (boards.any { board -> board.isWinner() }) {
-            println(boards.first{board -> board.isWinner()})
             return boards.first { board -> board.isWinner() }.getScore(draw)
         }
     }
@@ -62,39 +60,19 @@ class Board(private val board: List<List<String>>) {
             if (row.all { field -> draws.getOrDefault(field, false) }) return true
         }
 
-        board.indices.forEach { i ->
-            var isWinner = true
-            board.forEach { row ->
-                if (!draws.getOrDefault(row[i], false))
-                    isWinner = false
-            }
-            if (isWinner)
-                return true
+        board.indices.forEach{ i ->
+            if (board.all { row -> draws.getOrDefault(row[i], false) }) return true
         }
         return false
     }
 
     fun getScore(latestDraw: String): Int {
         var sumOfUnmarked = 0
-        for (row in board) {
-            for (v in row) {
-                if(!draws.getOrDefault(v, false)) {
-//                    println("not drawn: $v")
-                    sumOfUnmarked += v.toInt()
-                } else {
-                    println("drawn: $v")
-                }
-            }
-        }
-        println(sumOfUnmarked)
-        sumOfUnmarked = 0
-
         board.forEach { row ->
             row.forEach { field ->
                 if (!draws.getOrDefault(field, true)) sumOfUnmarked += field.toInt()
             }
         }
-        println(sumOfUnmarked)
         return sumOfUnmarked * latestDraw.toInt()
     }
 
