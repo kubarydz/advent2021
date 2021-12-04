@@ -7,14 +7,18 @@ fun main() {
         return getWinnerScore(boards, drawNumbers, draws)
     }
 
+
     fun part2(input: List<String>): Int {
-        return 1
+        val (drawNumbers, boards) = separateBoards(input)
+        val draws = initializeDrawsMap()
+        for (board in boards) board.setDraws(draws)
+        return getLoserScore(boards, drawNumbers, draws)
     }
 
     // test if implementation meets criteria from the description, like:
     val testInput = readInput("Day04_test")
     check(part1(testInput) == 4512)
-//    check(part2(testInput) == 1924)
+    check(part2(testInput) == 1924)
 
     val input = readInput("Day04")
     println(part1(input))
@@ -48,6 +52,17 @@ fun getWinnerScore(boards: List<Board>, drawNumbers: List<String>, draws: HashMa
     return 0
 }
 
+fun getLoserScore(boards: List<Board>, drawNumbers: List<String>, draws: HashMap<String, Boolean>): Int {
+    val remainingBoards = boards.toMutableList()
+    for (draw in drawNumbers) {
+        draws[draw] = true
+        if (remainingBoards.size == 1 && remainingBoards.first().isWinner())
+            return remainingBoards.first().getScore(draw)
+        remainingBoards.removeIf { board -> board.isWinner() }
+    }
+    return 0
+}
+
 class Board(private val board: List<List<String>>) {
     private var draws = HashMap<String, Boolean>()
 
@@ -60,7 +75,7 @@ class Board(private val board: List<List<String>>) {
             if (row.all { field -> draws.getOrDefault(field, false) }) return true
         }
 
-        board.indices.forEach{ i ->
+        board.indices.forEach { i ->
             if (board.all { row -> draws.getOrDefault(row[i], false) }) return true
         }
         return false
