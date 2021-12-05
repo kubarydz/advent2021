@@ -25,7 +25,7 @@ fun main() {
     println(part2(input))
 }
 
-fun separateBoards(input: List<String>): Pair<List<String>, List<Board>> {
+private fun separateBoards(input: List<String>): Pair<List<String>, List<Board>> {
     val boards = input.asSequence().drop(1).filter { a -> a != "" }.chunked(5).map { chunk ->
         chunk.map { v ->
             v.split(' ').filter { a -> a.isNotBlank() }
@@ -34,7 +34,7 @@ fun separateBoards(input: List<String>): Pair<List<String>, List<Board>> {
     return Pair(input.first().split(','), boards)
 }
 
-fun initializeDrawsMap(): HashMap<String, Boolean> {
+private fun initializeDrawsMap(): HashMap<String, Boolean> {
     val draws = HashMap<String, Boolean>()
     for (i in 0..99) {
         draws[i.toString()] = false
@@ -42,7 +42,7 @@ fun initializeDrawsMap(): HashMap<String, Boolean> {
     return draws
 }
 
-fun getWinnerScore(boards: List<Board>, drawNumbers: List<String>, draws: HashMap<String, Boolean>): Int {
+private fun getWinnerScore(boards: List<Board>, drawNumbers: List<String>, draws: HashMap<String, Boolean>): Int {
     for (draw in drawNumbers) {
         draws[draw] = true
         if (boards.any { board -> board.isWinner() }) {
@@ -52,7 +52,7 @@ fun getWinnerScore(boards: List<Board>, drawNumbers: List<String>, draws: HashMa
     return 0
 }
 
-fun getLoserScore(boards: List<Board>, drawNumbers: List<String>, draws: HashMap<String, Boolean>): Int {
+private fun getLoserScore(boards: List<Board>, drawNumbers: List<String>, draws: HashMap<String, Boolean>): Int {
     val remainingBoards = boards.toMutableList()
     for (draw in drawNumbers) {
         draws[draw] = true
@@ -63,7 +63,7 @@ fun getLoserScore(boards: List<Board>, drawNumbers: List<String>, draws: HashMap
     return 0
 }
 
-class Board(private val board: List<List<String>>) {
+private class Board(private val board: List<List<String>>) {
     private var draws = HashMap<String, Boolean>()
 
     fun setDraws(draws: HashMap<String, Boolean>) {

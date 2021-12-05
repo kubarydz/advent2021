@@ -18,7 +18,7 @@ fun main() {
     println(part2(input))
 }
 
-fun calculateGammaRate(input: List<String>): Int {
+private fun calculateGammaRate(input: List<String>): Int {
     val bitLength = input.first().length - 1
     var binaryString = ""
     for (i in 0..bitLength) {
@@ -32,7 +32,7 @@ fun calculateGammaRate(input: List<String>): Int {
     return Integer.parseInt(binaryString, 2)
 }
 
-fun calculateEpsilonRate(input: List<String>): Int {
+private fun calculateEpsilonRate(input: List<String>): Int {
     val bitLength = input.first().length - 1
     var binaryString = ""
     for (i in 0..bitLength) {
@@ -42,7 +42,7 @@ fun calculateEpsilonRate(input: List<String>): Int {
     return Integer.parseInt(binaryString, 2)
 }
 
-fun calculateOxygenGenRating(input: List<String>): Int {
+private fun calculateOxygenGenRating(input: List<String>): Int {
     val bitLength = input.first().length - 1
     var remainingInput = input
     for (i in 0..bitLength) {
@@ -52,13 +52,13 @@ fun calculateOxygenGenRating(input: List<String>): Int {
     return Integer.parseInt(remainingInput.first(), 2)
 }
 
-fun constructRemainingOxygenGenRating(input: List<String>, i: Int): List<String> {
+private fun constructRemainingOxygenGenRating(input: List<String>, i: Int): List<String> {
     val (zeros, ones) = countBits(input, i)
     val mostCommonBit = if (zeros > ones) '0' else '1'
     return input.filter { bits -> bits[i] == mostCommonBit }
 }
 
-fun countBits(input: List<String>, i: Int): Pair<Int, Int> {
+private fun countBits(input: List<String>, i: Int): Pair<Int, Int> {
     var zeros = 0
     var ones = 0
     input.forEach { bits ->
@@ -67,7 +67,7 @@ fun countBits(input: List<String>, i: Int): Pair<Int, Int> {
     return Pair(zeros, ones)
 }
 
-fun calculateCO2ScrubRating(input: List<String>): Int {
+private fun calculateCO2ScrubRating(input: List<String>): Int {
     val bitLength = input.first().length - 1
     var remainingInput = input
     for (i in 0..bitLength) {
@@ -77,7 +77,7 @@ fun calculateCO2ScrubRating(input: List<String>): Int {
     return Integer.parseInt(remainingInput.first(), 2)
 }
 
-fun constructRemainingCO2ScrubRating(input: List<String>, i: Int): List<String> {
+private fun constructRemainingCO2ScrubRating(input: List<String>, i: Int): List<String> {
     val (zeros, ones) = countBits(input, i)
     val mostCommonBit = if (zeros <= ones) '0' else '1'
     return input.filter { bits -> bits[i] == mostCommonBit }
