@@ -24,11 +24,12 @@ fun main() {
 
 private fun loadDataIntoStraightDiagram(diagram: Array<IntArray>, input: List<String>) {
     val readyData = splitData(input)
-    for (data in readyData) {
+    readyData.forEach { data ->
         val linePoints = calculateStraightCloudLines(data)
-        for ((y, x) in linePoints) {
-            if (diagram[x][y] < 2)
-                diagram[x][y]++
+        linePoints.forEach { (y, x) ->
+            when {
+                diagram[x][y] < 2 -> diagram[x][y]++
+            }
         }
     }
 }
@@ -64,11 +65,12 @@ private fun calculateDiagramValue(diagram: Array<IntArray>): Int {
 
 private fun loadDataIntoDiagonalDiagram(diagram: Array<IntArray>, input: List<String>) {
     val readyData = splitData(input)
-    for (data in readyData) {
+    readyData.forEach { data ->
         val linePoints = calculateDiagonalCloudLines(data)
-        for ((y, x) in linePoints) {
-            if (diagram[x][y] < 2)
-                diagram[x][y]++
+        linePoints.forEach { (y, x) ->
+            when {
+                diagram[x][y] < 2 -> diagram[x][y]++
+            }
         }
     }
 }
@@ -83,7 +85,7 @@ private fun calculateDiagonalCloudLines(input: List<String>): List<Pair<Int, Int
     val diagonalLines = listOf<Pair<Int, Int>>().toMutableList()
     var xCoordinate = coordinates[0]
     var yCoordinate = coordinates[1]
-    for (i in 0..diagonalLength) {
+    (0..diagonalLength).forEach { _ ->
         diagonalLines.add(Pair(xCoordinate, yCoordinate))
         xCoordinate += stepX
         yCoordinate += stepY
