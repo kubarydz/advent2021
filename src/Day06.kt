@@ -23,8 +23,8 @@ private fun calculateFish(input: List<Int>, days: Int): Long {
     val fish = LongArray(9)
     input.forEach { fish[it] += 1L }
     var lastFishCount = fish[8]
-    for (i in 1..days) {
-        for (a in fish.lastIndex downTo 0) {
+    (1..days).forEach { _ ->
+        (fish.lastIndex downTo 0).forEach { a ->
             if (a == 0) {
                 fish[6] += fish[a]
                 val temp = lastFishCount
