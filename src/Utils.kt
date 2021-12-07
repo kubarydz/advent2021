@@ -17,3 +17,5 @@ fun String.md5(): String = BigInteger(1, MessageDigest.getInstance("MD5").digest
  * Returns list of Ints
  */
 fun readInputToInts(name: String) = readInput(name).map { it.toInt() }
+
+fun readInputToIntsComma(name: String) = readInput(name).first().split(',').map { it.toInt() }
