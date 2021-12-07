@@ -14,9 +14,9 @@ fun main() {
 
     fun part2(input: List<Int>): Int {
         var lowestFuelCost = Int.MAX_VALUE
-            for (i in input.indices) {
-                val fuelCost = input.sumOf { fuelCostIncreasing(abs(it - i), 1) }
-                lowestFuelCost = min(lowestFuelCost, fuelCost)
+        for (i in input.indices) {
+            val fuelCost = input.sumOf { fuelCostExpensive(abs(it - i)) }
+            lowestFuelCost = min(lowestFuelCost, fuelCost)
         }
         return lowestFuelCost
     }
@@ -32,10 +32,6 @@ fun main() {
     println(part2(input))
 }
 
-private fun fuelCostIncreasing(distanceLeft: Int, costMultiplier: Int): Int {
-    return if (distanceLeft == 0) {
-        0
-    } else {
-        costMultiplier + fuelCostIncreasing(distanceLeft - 1, costMultiplier + 1)
-    }
+private fun fuelCostExpensive(distance: Int): Int {
+    return distance * (distance + 1)/2
 }
