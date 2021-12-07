@@ -1,28 +1,22 @@
 import kotlin.math.abs
+import kotlin.math.min
 
 fun main() {
 
     fun part1(input: List<Int>): Int {
         var lowestFuelCost = Int.MAX_VALUE
         for (i in input.indices) {
-            var fuelCost = 0
-            for (position in input)
-                fuelCost += abs(position - i)
-            if (fuelCost < lowestFuelCost)
-                lowestFuelCost = fuelCost
+            val fuelCost = input.sumOf { abs(it - i) }
+            lowestFuelCost = min(lowestFuelCost, fuelCost)
         }
         return lowestFuelCost
     }
 
     fun part2(input: List<Int>): Int {
         var lowestFuelCost = Int.MAX_VALUE
-        for (i in input.indices) {
-            var fuelCost = 0
-            for (position in input) {
-                fuelCost += fuelCost(abs(position - i), 1)
-            }
-            if (fuelCost < lowestFuelCost)
-                lowestFuelCost = fuelCost
+            for (i in input.indices) {
+                val fuelCost = input.sumOf { fuelCostIncreasing(abs(it - i), 1) }
+                lowestFuelCost = min(lowestFuelCost, fuelCost)
         }
         return lowestFuelCost
     }
@@ -38,10 +32,10 @@ fun main() {
     println(part2(input))
 }
 
-private fun fuelCost(distanceLeft: Int, costMultiplier: Int): Int {
+private fun fuelCostIncreasing(distanceLeft: Int, costMultiplier: Int): Int {
     return if (distanceLeft == 0) {
         0
     } else {
-        costMultiplier + fuelCost(distanceLeft - 1, costMultiplier + 1)
+        costMultiplier + fuelCostIncreasing(distanceLeft - 1, costMultiplier + 1)
     }
 }
