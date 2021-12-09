@@ -11,7 +11,7 @@ fun main() {
         val maxColIndex = rows.first().size - 1
         val maxRowIndex = rows.size - 1
         return lowestPoints.map { lowPoint ->
-            calculateHigherAdjacent(rows, lowPoint, maxRowIndex, maxColIndex, emptyList<LowPoint>().toMutableList())
+            calculateBasin(rows, lowPoint, maxRowIndex, maxColIndex, mutableListOf())
         }
             .sortedDescending().take(3).reduce(Int::times)
     }
@@ -47,7 +47,7 @@ private fun getLowestPoints(input: List<String>): MutableList<LowPoint> {
     return lowestPoints
 }
 
-private fun calculateHigherAdjacent(
+private fun calculateBasin(
     cave: List<CharArray>,
     point: LowPoint,
     maxRow: Int,
@@ -60,7 +60,7 @@ private fun calculateHigherAdjacent(
     if (point.position.first != 0 && cave[point.position.first - 1][point.position.second].digitToInt() > point.value
         && cave[point.position.first - 1][point.position.second].digitToInt() != 9
     ) {
-        higherPoints += calculateHigherAdjacent(
+        higherPoints += calculateBasin(
             cave, LowPoint(
                 Pair(point.position.first - 1, point.position.second),
                 cave[point.position.first - 1][point.position.second].digitToInt()
@@ -70,7 +70,7 @@ private fun calculateHigherAdjacent(
     if (point.position.first != maxRow && cave[point.position.first + 1][point.position.second].digitToInt() > point.value
         && cave[point.position.first + 1][point.position.second].digitToInt() != 9
     ) {
-        higherPoints += calculateHigherAdjacent(
+        higherPoints += calculateBasin(
             cave, LowPoint(
                 Pair(point.position.first + 1, point.position.second),
                 cave[point.position.first + 1][point.position.second].digitToInt()
@@ -80,7 +80,7 @@ private fun calculateHigherAdjacent(
     if (point.position.second != 0 && cave[point.position.first][point.position.second - 1].digitToInt() > point.value
         && cave[point.position.first][point.position.second - 1].digitToInt() != 9
     ) {
-        higherPoints += calculateHigherAdjacent(
+        higherPoints += calculateBasin(
             cave, LowPoint(
                 Pair(point.position.first, point.position.second - 1),
                 cave[point.position.first][point.position.second - 1].digitToInt()
@@ -90,7 +90,7 @@ private fun calculateHigherAdjacent(
     if (point.position.second != maxColumn && cave[point.position.first][point.position.second + 1].digitToInt() > point.value
         && cave[point.position.first][point.position.second + 1].digitToInt() != 9
     ) {
-        higherPoints += calculateHigherAdjacent(
+        higherPoints += calculateBasin(
             cave, LowPoint(
                 Pair(point.position.first, point.position.second + 1),
                 cave[point.position.first][point.position.second + 1].digitToInt()
