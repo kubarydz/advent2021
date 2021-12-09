@@ -10,17 +10,10 @@ fun main() {
         val rows = input.map { it.toCharArray() }
         val maxColIndex = rows.first().size - 1
         val maxRowIndex = rows.size - 1
-        val largestBasins = emptyList<Int>().toMutableList()
-        lowestPoints.forEach { lowPoint ->
-            val basin =
-                calculateHigherAdjacent(rows, lowPoint, maxRowIndex, maxColIndex, emptyList<LowPoint>().toMutableList())
-            if (largestBasins.size < 3) largestBasins.add(basin)
-            else if (largestBasins.minOf { it } < basin){
-                largestBasins.remove(largestBasins.minOf { it })
-                largestBasins.add(basin)
-            }
+        return lowestPoints.map { lowPoint ->
+            calculateHigherAdjacent(rows, lowPoint, maxRowIndex, maxColIndex, emptyList<LowPoint>().toMutableList())
         }
-        return largestBasins.fold(1) { sum, el -> sum * el }
+            .sortedDescending().take(3).reduce(Int::times)
     }
 
 
@@ -61,7 +54,7 @@ private fun calculateHigherAdjacent(
     maxColumn: Int,
     calculatedPoints: MutableList<LowPoint>
 ): Int {
-    if(calculatedPoints.contains(point)) return 0
+    if (calculatedPoints.contains(point)) return 0
     calculatedPoints.add(point)
     var higherPoints = 0
     if (point.position.first != 0 && cave[point.position.first - 1][point.position.second].digitToInt() > point.value
