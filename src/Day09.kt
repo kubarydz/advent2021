@@ -12,8 +12,7 @@ fun main() {
         val maxRowIndex = rows.size - 1
         return lowestPoints.map { lowPoint ->
             calculateBasin(rows, lowPoint, maxRowIndex, maxColIndex, mutableListOf())
-        }
-            .sortedDescending().take(3).reduce(Int::times)
+        }.sortedDescending().take(3).reduce(Int::times)
     }
 
 
