@@ -17,10 +17,10 @@ fun main() {
     }
 
     fun flashAdjacent(octopuses: List<Octopus>, adjacentLocations: List<Pair<Int, Int>>) {
-        octopuses.filter { adjacentLocations.contains(it.coords) }
-            .filter { !it.flashed && ++it.charge > 9 }.forEach { octopus ->
-                octopus.flashed = true
-                flashAdjacent(octopuses, octopus.adjacentLocations())
+        octopuses.asSequence().filter { adjacentLocations.contains(it.coords) }
+            .filter { !it.flashed && ++it.charge > 9  }.forEach { octopus ->
+                    octopus.flashed = true
+                    flashAdjacent(octopuses, octopus.adjacentLocations())
             }
     }
 
