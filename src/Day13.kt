@@ -1,4 +1,5 @@
 import kotlin.math.abs
+import kotlin.system.measureTimeMillis
 
 fun main() {
 
@@ -19,10 +20,9 @@ fun main() {
         var paper = inPaper
         for ((foldAxis, foldLine) in foldInstructions) {
             paper = paper.map {
-                if(foldAxis.trim() == "x"){
-                    if(it.first > foldLine.toInt()) it.first - 2*abs(it.first - foldLine.toInt()) to it.second else it
-                }
-                else if(it.second > foldLine.toInt()) it.first to it.second - 2*abs(it.second - foldLine.toInt()) else it
+                if (foldAxis.trim() == "x") {
+                    if (it.first > foldLine.toInt()) it.first - 2 * abs(it.first - foldLine.toInt()) to it.second else it
+                } else if (it.second > foldLine.toInt()) it.first to it.second - 2 * abs(it.second - foldLine.toInt()) else it
             }.distinct()
         }
         return paper
