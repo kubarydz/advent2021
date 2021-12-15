@@ -1,3 +1,8 @@
+package day02
+
+import readInput
+import readSample
+
 fun main() {
     fun part1(input: List<String>): Int {
         var depth = 0
@@ -34,10 +39,10 @@ fun main() {
     }
 
     // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day02_test")
+    val testInput = readSample("day02")
     check(part1(testInput) == 150)
 
-    val input = readInput("Day02")
+    val input = readInput("day02")
     println(part1(input))
     println(part2(input))
 

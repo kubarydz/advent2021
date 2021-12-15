@@ -1,5 +1,8 @@
+package day13
+
+import readInput
+import readSample
 import kotlin.math.abs
-import kotlin.system.measureTimeMillis
 
 fun main() {
 
@@ -54,11 +57,11 @@ fun main() {
 
 
     // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day13_test")
+    val testInput = readSample("day13")
     check(part1(testInput) == 17)
     part2(testInput)
 
-    val input = readInput("Day13")
+    val input = readInput("day13")
     println(part1(input))
     part2(input)
 }

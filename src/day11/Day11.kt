@@ -1,3 +1,8 @@
+package day11
+
+import readInput
+import readSample
+
 fun main() {
 
     class Octopus(val coords: Pair<Int, Int>, var charge: Int, var flashed: Boolean = false) {
@@ -62,11 +67,11 @@ fun main() {
 
 
     // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day11_test")
+    val testInput = readSample("day11")
     check(part1(testInput) == 1656)
     check(part2(testInput) == 195)
 
-    val input = readInput("Day11")
+    val input = readInput("day11")
     println(part1(input))
     println(part2(input))
 }

@@ -1,3 +1,8 @@
+package day05
+
+import readInput
+import readSample
+
 fun main() {
 
     fun part1(input: List<String>, diagramSize: Int): Int {
@@ -13,11 +18,11 @@ fun main() {
     }
 
     // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day05_test")
+    val testInput = readSample("day05")
     check(part1(testInput, 10) == 5)
     check(part2(testInput, 10) == 12)
 
-    val input = readInput("Day05")
+    val input = readInput("day05")
     println(part1(input, 1000))
     println(part2(input, 1000))
 }

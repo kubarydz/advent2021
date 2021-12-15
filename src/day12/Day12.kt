@@ -1,3 +1,7 @@
+package day12
+
+import readInput
+import readSample
 import java.util.*
 
 fun main() {
@@ -39,11 +43,11 @@ fun main() {
 
 
     // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day12_test")
+    val testInput = readSample("day12")
     check(part1(testInput) == 10)
     check(part2(testInput) == 36)
 
-    val input = readInput("Day12")
+    val input = readInput("day12")
     println(part1(input))
     println(part2(input))
 }

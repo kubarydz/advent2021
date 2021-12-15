@@ -1,3 +1,8 @@
+package day10
+
+import readInput
+import readSample
+
 fun main() {
 
     val corruptedScores = mapOf(')' to 3, ']' to 57, '}' to 1197, '>' to 25137)
@@ -42,11 +47,11 @@ fun main() {
 
 
     // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day10_test")
+    val testInput = readSample("day10")
     check(part1(testInput) == 26397)
     check(part2(testInput) == 288957L)
 
-    val input = readInput("Day10")
+    val input = readInput("day10")
     println(part1(input))
     println(part2(input))
 }

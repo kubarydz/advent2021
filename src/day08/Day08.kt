@@ -1,3 +1,8 @@
+package day08
+
+import readInput
+import readSample
+
 fun main() {
 
     fun part1(input: List<String>): Int {
@@ -37,11 +42,11 @@ fun main() {
 
 
     // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day08_test")
+    val testInput = readSample("day08")
     check(part1(testInput) == 26)
     check(part2(testInput) == 61229)
 
-    val input = readInput("Day08")
+    val input = readInput("day08")
     println(part1(input))
     println(part2(input))
 }

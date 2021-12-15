@@ -1,3 +1,8 @@
+package day01
+
+import readInput
+import readSample
+
 fun main() {
     fun part1(input: List<Int>): Int {
         var previousVal = input.first()
@@ -15,10 +20,10 @@ fun main() {
     }
 
     // test if implementation meets criteria from the description, like:
-    val testInput = readInputToInts("Day01_test")
+    val testInput = readSample("day01").map { it.toInt() }
     check(part1(testInput) == 7)
 
-    val input = readInput("Day01").map { it.toInt() }
+    val input = readInput("day01").map { it.toInt() }
     println(part1(input))
     println(part2(input))
 }
