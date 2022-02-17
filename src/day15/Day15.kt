@@ -69,7 +69,7 @@ private fun calculateShortestPath(input: List<List<Int>>): Int {
     return path.sumOf { costMap[it]!! }
 }
 
-fun findShortestPath(goal: Point, startingPoint: Point, cameFrom: HashMap<Point, Point>): LinkedList<Point> {
+private fun findShortestPath(goal: Point, startingPoint: Point, cameFrom: HashMap<Point, Point>): LinkedList<Point> {
     var current = goal
     val path = LinkedList<Point>()
     while (current != startingPoint) {
